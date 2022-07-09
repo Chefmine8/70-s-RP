@@ -34,4 +34,15 @@ module.exports = class componentManager {
             );
         return buttonForActionTicket;
     }
+
+    buttonForRules() {
+        const buttonForRules = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('rules')
+                    .setLabel('Je les lus!')
+                    .setStyle('SUCCESS'),
+            )
+        return buttonForRules;
+    }
 }

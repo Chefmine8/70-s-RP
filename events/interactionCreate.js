@@ -1,7 +1,7 @@
 const { Permissions, Message } = require('discord.js');
 module.exports = {
     run: async(client, interaction) => {
-        const ButtonsID = ['staff', 'closeticket', 'boutique', 'legal', 'illegal', 'autre', 'claim'];
+        const ButtonsID = ['staff', 'closeticket', 'boutique', 'legal', 'illegal', 'autre', 'claim', 'rules'];
         const guild = client.guilds.cache.get('989845864191258634');
         if (interaction.customId === 'staff') {
             console.log(`ticket staff ouvert par: ${interaction.member.displayName}`)
@@ -37,7 +37,7 @@ module.exports = {
         }
         if (interaction.customId === 'closeticket') {
             if (interaction.channel.name.startsWith('ticket)')) return;
-            return interaction.channel.delete(), console.log(`ticket fermé par: ${interaction.member.displayName}`);
+            return interaction.channel.delete(), console.log(`Ticket Fermé par: ${interaction.member.displayName}`);
         }
 
         //ticket boutique
@@ -90,8 +90,23 @@ module.exports = {
                 fetchReply: true
                 }
             )
-            console.log(`Ticket Claim par ${interaction.member.displayName}`)
+            console.log(`Ticket Claim par :${interaction.member.displayName}`)
+        }
+
+        //reglement
+        if (interaction.customId === 'rules') {
+            interaction.member.roles.add('989855496171302924');
+            const msg = await interaction.reply(
+                {
+                content: `${interaction.member} vous avez bien signé le réglement.`,
+                fetchReply: true
+                }
+            )
+            setTimeout(() => {
+                msg.delete()
+            }, 1000)
         }
     },
+
     name: 'interactionCreate'
 }
